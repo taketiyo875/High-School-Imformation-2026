@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>受験情報ポータル</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* ヒーローエリア */
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero p.subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p.description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* カウントダウンエリア */
+        .countdown-container {
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.2rem;
+            max-width: 450px;
+            margin: 0 auto;
+            backdrop-filter: blur(5px);
+        }
+
+        .countdown-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .countdown-timer {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .countdown-timer span {
+            font-size: 2.4rem;
+            color: #ffeb3b;
+            margin: 0 0.2rem;
+        }
+
+        /* メインレイアウト */
+        .container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1rem;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .grid-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .room-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .room-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .room-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .room-desc {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            min-height: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #2a5298;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+            width: 100%;
+            max-width: 180px;
+        }
+
+        .btn:hover {
+            background-color: #1e3c72;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 5rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ヒーローエリア -->
+    <header class="hero">
+        <p class="subtitle">EXAM INFORMATION PORTAL</p>
+        <h1>受験に役立つ情報を、ここから。</h1>
+        <p class="description">勉強法や受験に役立つコラムと、先輩たちのリアルな受験体験記をまとめています。</p>
+        
+        <!-- カウントダウン -->
+        <div class="countdown-container">
+            <div class="countdown-title">公立高校一般入試まで</div>
+            <div class="countdown-timer" id="countdown">残り <span id="days-left">-</span> 日</div>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <div class="container">
+        <h2 class="section-title">知りたい情報を、ここから。</h2>
+        <p class="section-subtitle">気になるページを選んで、ゆっくり見てみてください。</p>
+
+        <main>
+            <!-- 強化特化部屋セクション -->
+            <section class="card">
+                <h2>強化特化部屋</h2>
+                <p>特定教科の対策に特化した専門の学習ルームです。</p>
+                <div class="grid-links">
+                    <div class="room-box">
+                        <div>
+                            <div class="room-icon">📝</div>
+                            <div class="room-title">英語専門部屋</div>
+                            <div class="room-desc">勉強法や受験に関する情報をまとめています。受験勉強のヒントを探している人へ。</div>
+                        </div>
+                        <a href="#" class="btn">コラムを見る</a>
+                    </div>
+                    <div class="room-box">
+                        <div>
+                            <div class="room-icon">🎓</div>
+                            <div class="room-title">数学専門部屋</div>
+                            <div class="room-desc">先輩たちが実際に経験した受験について、リアルな体験記を読むことができます。</div>
+                        </div>
+                        <a href="#" class="btn">受験体験記を見る</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 受験情報ポータル</p>
+    </footer>
+
+    <script>
+        function updateCountdown() {
+            // 目標となる入試日を設定 (2027年2月15日)
+            const targetDate = new Date('2027-02-15T00:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference <= 0) {
+                document.getElementById('countdown').innerHTML = '入試当日です！全力をつくそう！';
+                return;
+            }
+
+            // ミリ秒から日数を計算 (切り上げ)
+            const daysLeft = Math.ceil(difference / (1000 * 60 * 60 * 24));
+            document.getElementById('days-left').textContent = daysLeft;
+        }
+
+        // 初期実行
+        updateCountdown();
+    </script>
+</body>
+</html>
